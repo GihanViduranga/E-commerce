@@ -81,7 +81,7 @@
                 </div>
                 <a href="forgetPassword.jsp" class="text-decoration-none">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <a href="dashboard.jsp"><button type="submit" class="btn btn-primary w-100">Login</button></a>
         </form>
         <div class="text-center mt-4">
             <p>Don't have an account? <a href="signUp.jsp" class="text-decoration-none">Sign Up</a></p>
