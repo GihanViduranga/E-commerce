@@ -51,10 +51,15 @@
     <h4 class="mb-3">Reset Your Password</h4>
     <p class="text-muted mb-4">Please verify your details to reset your password.</p>
     <form action="#" method="POST">
-        <!-- Username or Email -->
+        <!-- Full Name -->
         <div class="mb-3">
-            <label for="username" class="form-label">Username or Email</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username or email" required>
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="username" class="form-label">Email</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email" required>
         </div>
         <!-- Security Question -->
         <div class="mb-3">
@@ -81,6 +86,15 @@
             <label for="confirm-password" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Re-enter new password" required>
         </div>
+        <!-- Role Selection -->
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" id="role" name="role" required>
+                <option selected disabled>Select a role</option>
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div> 
         <!-- Reset Button -->
         <button type="submit" class="btn btn-primary w-100">Reset Password</button>
     </form>

@@ -85,6 +85,15 @@
             <label for="security-answer" class="form-label">Answer</label>
             <input type="text" class="form-control" id="security-answer" name="security-answer" placeholder="Enter your answer" required>
         </div>
+        <!-- Role Selection -->
+        <div class="mb-3">
+            <label for="role" class="form-label">Role</label>
+            <select class="form-select" id="role" name="role" required>
+                <option selected disabled>Select a role</option>
+                <option value="customer">Customer</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
         <!-- Signup Button -->
         <button type="submit" class="btn btn-primary w-100">Sign Up</button>
     </form>
