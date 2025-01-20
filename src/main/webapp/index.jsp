@@ -13,17 +13,26 @@
             justify-content: center;
             margin: 0;
         }
+        video#background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Places the video behind the content */
+        }
         .container {
-            background-color: #fff;
+            background-color: rgb(175, 221, 229, 0.9);
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             display: flex;
-            max-width: 900px;
+            max-width: 1100px;
             width: 100%;
         }
         .image-section {
-            background: url('images/LoginImages.jpg') center/cover no-repeat;
+            background: url('images/ALOHA.png') center/cover no-repeat;
             flex: 1;
         }
         .form-section {
@@ -45,11 +54,11 @@
             padding: 0.8rem;
             font-size: 1rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #003135, #024950);
             border: none;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            background: linear-gradient(135deg, #024950, #003135);
         }
         .text-muted {
             font-size: 0.9rem;
@@ -57,6 +66,11 @@
     </style>
 </head>
 <body>
+<!-- Video Background -->
+<video id="background-video" autoplay loop muted>
+    <source src="Videos/Fashion.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 <div class="container">
     <!-- Image Section -->
     <div class="image-section d-none d-md-block"></div>

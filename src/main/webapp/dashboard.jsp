@@ -1,134 +1,150 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Gihan Viduranga
-  Date: 1/16/2025
-  Time: 1:03 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
+    header {
+      background: linear-gradient(135deg, #1e2a47, #024950);
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .navbar-center {
-            flex-grow: 1;
-            text-align: center;
-        }
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
 
-        .background-scroll {
-            position: absolute;
-            top: 30px; /* Adjust to match navbar height */
-            left: 0;
-            width: 200%; /* Adjust to fit scrolling effect */
-            height: 130%;
-            background-image: url('images/DashImage1.jpg'); /* Replace with your image URL */
-            background-repeat: repeat-x;
-            background-size: cover;
-            animation: scroll-left 20s linear infinite;
-        }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 5px 20px;
+      width: 60%;
+    }
 
-        @keyframes scroll-left {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 15px;
+      width: 100%;
+      margin-right: 10px;
+      box-sizing: border-box;
+    }
 
-        .categories {
-            position: relative;
-            top: 320px; /* Adjust based on background image height */
-            padding: 20px;
-            text-align: center;
-            z-index: 10;
-        }
+    .search-bar button {
+      background-color: #964734;
+      border: none;
+      border-radius: 15px;
+      padding: 10px 15px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-        .category {
-            display: inline-block;
-            margin: 10px;
-            padding: 5px 10px;
-            /*background-color: rgba(255, 255, 255, 0.8);*/
-            border-radius: 8px;
-            font-weight: bold;
-            /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-        }
-    </style>
+    .search-bar button:hover {
+      background-color: #ff7f50;
+    }
+
+    .search-bar i {
+      margin-right: 5px;
+    }
+
+    .logout-container {
+      margin-left: 20px;
+    }
+
+    .logout-button {
+      background-color: #ff6347;
+      color: #fff;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .logout-button:hover {
+      background-color: #ff4500;
+    }
+  </style>
+
+
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="navbar-brand">Super Shopper</div>
-    <div class="navbar-center">
-
+<header>
+  <h1>ALOHA</h1>
+  <div class="search-bar">
+    <input type="text" placeholder="Search the entire store...">
+    <button><i class="fas fa-search"></i> Search</button>
+  </div>
+  <div class="logout-container">
+    <button class="logout-button">Logout</button>
+  </div>
+</header>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="images/Wall1.jpg" class="d-block w-75" alt="...">
     </div>
-    <a href="index.jsp"><button class="btn btn-outline-danger" >Logout</button></a>
-</nav>
-
-<div class="background-scroll"></div>
-
-<div class="categories">
+    <div class="carousel-item">
+      <img src="images/Wall2.jpg" class="d-block w-75" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="images/Wall3.jpg" class="d-block w-75" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="images/Wall4.jpg" class="d-block w-75" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="images/Wall5.jpg" class="d-block w-75" alt="...">
+    </div>
+  </div>
+</div>
+<div class="container">
+  <%--<div class="category-container">
+    <%
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname", "username", "password");
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery("SELECT * FROM categories");
+      while (rs.next()) {
+    %>
     <div class="category">
-        <div class="card" style="width: 18rem;">
-            <img src="images/Men.jpg" class="card-img-top" alt="Men's Fashion">
-            <div class="card-body">
-                <h2 class="card-title">Men's FASHION</h2>
-                <a href="#" class="btn btn-primary">Go to Men's FASHION</a>
-            </div>
-        </div>
+      <img src="<%= rs.getString("image_url") %>" alt="<%= rs.getString("name") %>">
+      <p><%= rs.getString("name") %></p>
     </div>
-    <div class="category">
-        <div class="card" style="width: 18rem;">
-            <img src="images/Ladies.jpg" class="card-img-top" alt="Men's Fashion">
-            <div class="card-body">
-                <h2 class="card-title">Ladies FASHION</h2>
-                <a href="#" class="btn btn-primary">Go to Ladies FASHION</a>
-            </div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="card" style="width: 18rem;">
-            <img src="images/KidsCard.jpg" class="card-img-top" alt="Men's Fashion">
-            <div class="card-body">
-                <h2 class="card-title">Kids FASHION</h2>
-                <a href="#" class="btn btn-primary">Go to Kids FASHION</a>
-            </div>
-        </div>
-    </div>
-    <div class="category">
-        <div class="card" style="width: 18rem;">
-            <img src="images/Card4.jpeg" class="card-img-top" alt="Men's Fashion">
-            <div class="card-body">
-                <h2 class="card-title">Accessories</h2>
-                <a href="#" class="btn btn-primary">Go to Accessories</a>
-            </div>
-        </div>
-    </div>
+    <%
+      }
+      conn.close();
+    %>
+  </div>--%>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-

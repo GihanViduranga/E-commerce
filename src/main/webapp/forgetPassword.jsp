@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Forget Password</title>
+    <title>Forgot Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #003135, #024950);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -35,11 +35,11 @@
             padding: 0.8rem;
             font-size: 1rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #003135, #024950);
             border: none;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            background: linear-gradient(135deg, #024950, #003135);
         }
         .text-muted {
             font-size: 0.9rem;
@@ -47,25 +47,29 @@
     </style>
 </head>
 <body>
-<div class="container text-center">
-    <h4 class="mb-3">Reset Your Password</h4>
-    <p class="text-muted mb-4">Please verify your details to reset your password.</p>
+<div class="container">
+    <h4 class="mb-4 text-center">Reset Your Password</h4>
     <form action="#" method="POST">
-        <!-- Full Name -->
-        <div class="mb-3">
-            <label for="fullName" class="form-label">Full Name</label>
-            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
-        </div>
         <!-- Email -->
         <div class="mb-3">
-            <label for="username" class="form-label">Email</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your email" required>
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <!-- Password -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <!-- Confirm Password -->
+        <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
         </div>
         <!-- Security Question -->
         <div class="mb-3">
             <label for="security-question" class="form-label">Security Question</label>
             <select class="form-select" id="security-question" name="security-question" required>
-                <option selected disabled>Select a question</option>
+                <option selected disabled>Select a security question</option>
                 <option value="pet-name">What is your pet's name?</option>
                 <option value="school-name">What is the name of your first school?</option>
                 <option value="birth-city">In what city were you born?</option>
@@ -76,30 +80,11 @@
             <label for="security-answer" class="form-label">Answer</label>
             <input type="text" class="form-control" id="security-answer" name="security-answer" placeholder="Enter your answer" required>
         </div>
-        <!-- New Password -->
-        <div class="mb-3">
-            <label for="new-password" class="form-label">New Password</label>
-            <input type="password" class="form-control" id="new-password" name="new-password" placeholder="Enter new password" required>
-        </div>
-        <!-- Confirm Password -->
-        <div class="mb-3">
-            <label for="confirm-password" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Re-enter new password" required>
-        </div>
-        <!-- Role Selection -->
-        <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role" name="role" required>
-                <option selected disabled>Select a role</option>
-                <option value="customer">Customer</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div> 
-        <!-- Reset Button -->
+        <!-- Signup Button -->
         <button type="submit" class="btn btn-primary w-100">Reset Password</button>
     </form>
-    <p class="text-muted mt-3">
-        Remembered your password? <a href="index.jsp" class="text-decoration-none">Login here</a>.
+    <p class="text-muted text-center mt-3">
+        Already have an account? <a href="index.jsp" class="text-decoration-none">Login here</a>.
     </p>
 </div>
 <!-- Bootstrap Bundle with Popper -->

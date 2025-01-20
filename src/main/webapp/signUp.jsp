@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #003135, #024950);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -35,11 +35,11 @@
             padding: 0.8rem;
             font-size: 1rem;
             font-weight: bold;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #003135, #024950);
             border: none;
         }
         .btn-primary:hover {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
+            background: linear-gradient(135deg, #024950, #003135);
         }
         .text-muted {
             font-size: 0.9rem;
