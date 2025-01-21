@@ -1,4 +1,4 @@
-<%--
+<%@ page import="static jdk.javadoc.internal.doclets.formats.html.markup.HtmlStyle.title" %><%--
   Created by IntelliJ IDEA.
   User: Gihan Viduranga
   Date: 1/13/2025
@@ -10,6 +10,7 @@
 <head>
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             background: linear-gradient(135deg, #003135, #024950);
@@ -49,7 +50,7 @@
 <body>
 <div class="container">
     <h4 class="mb-4 text-center">Create an Account</h4>
-    <form action="#" method="POST">
+    <form action="user_servlet" method="POST">
         <!-- Full Name -->
         <div class="mb-3">
             <label for="fullName" class="form-label">Full Name</label>
@@ -101,6 +102,27 @@
         Already have an account? <a href="index.jsp" class="text-decoration-none">Login here</a>.
     </p>
 </div>
+<script>
+    <%
+        String message = (String) request.getAttribute("message");
+        String alertType = (String) request.getAttribute("alertType");
+
+        if (message != null && alertType != null) {
+    %>
+    Swal.fire({
+        icon: '<%= alertType %>', // 'success' or 'error'
+        title: '<%= alertType.equals("success") ? "Success!" : "Error!" %>',
+        text: '<%= message %>',
+        confirmButtonText: 'Okay'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            <% if ("success".equals(alertType)) { %>
+            window.location.href = "index.jsp"; // Redirect to index page on success
+            <% } %>
+        }
+    });
+    <%} %>
+</script>
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
