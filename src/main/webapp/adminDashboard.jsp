@@ -126,7 +126,7 @@
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">Admin Dashboard</div>
     <a href="productManagement.jsp"><i class="fas fa-box"></i> <span>Products</span></a>
-    <a href="categoryManagement.jsp"><i class="fas fa-list-alt"></i> <span>Categories</span></a>
+    <a href="categoryList"><i class="fas fa-list-alt"></i> <span>Categories</span></a>
     <a href="#order-management"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
     <a href="userManagement.jsp"><i class="fas fa-users"></i> <span>Users</span></a>
     <a href="index.jsp" class="text-danger"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
@@ -155,7 +155,7 @@
                 <img src="images/CategoryManage.jpg" alt="Category Management">
                 <h5>Category Management</h5>
                 <p>Organize your store with effective category management.</p>
-                <a href="categoryManagement.jsp" class="btn btn-modern btn-secondary">Manage Categories</a>
+                <a href="categoryList" class="btn btn-modern btn-secondary">Manage Categories</a>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
