@@ -50,7 +50,7 @@
 <body>
 <div class="container">
     <h4 class="mb-4 text-center">Create an Account</h4>
-    <form action="user_servlet" method="POST">
+    <form id="signupForm" action="user_servlet" method="POST">
         <!-- Full Name -->
         <div class="mb-3">
             <label for="fullName" class="form-label">Full Name</label>
@@ -71,30 +71,6 @@
             <label for="confirmPassword" class="form-label">Confirm Password</label>
             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
         </div>
-        <!-- Security Question -->
-        <div class="mb-3">
-            <label for="security-question" class="form-label">Security Question</label>
-            <select class="form-select" id="security-question" name="security-question" required>
-                <option selected disabled>Select a security question</option>
-                <option value="pet-name">What is your pet's name?</option>
-                <option value="school-name">What is the name of your first school?</option>
-                <option value="birth-city">In what city were you born?</option>
-            </select>
-        </div>
-        <!-- Security Answer -->
-        <div class="mb-3">
-            <label for="security-answer" class="form-label">Answer</label>
-            <input type="text" class="form-control" id="security-answer" name="security-answer" placeholder="Enter your answer" required>
-        </div>
-        <!-- Role Selection -->
-        <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role" name="role" required>
-                <option selected disabled>Select a role</option>
-                <option value="customer">Customer</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
         <!-- Signup Button -->
         <button type="submit" class="btn btn-primary w-100">Sign Up</button>
     </form>
@@ -102,28 +78,50 @@
         Already have an account? <a href="index.jsp" class="text-decoration-none">Login here</a>.
     </p>
 </div>
-<script>
-    <%
-        String message = (String) request.getAttribute("message");
-        String alertType = (String) request.getAttribute("alertType");
 
-        if (message != null && alertType != null) {
-    %>
-    Swal.fire({
-        icon: '<%= alertType %>', // 'success' or 'error'
-        title: '<%= alertType.equals("success") ? "Success!" : "Error!" %>',
-        text: '<%= message %>',
-        confirmButtonText: 'Okay'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            <% if ("success".equals(alertType)) { %>
-            window.location.href = "index.jsp"; // Redirect to index page on success
-            <% } %>
-        }
-    });
-    <%} %>
-</script>
 <!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Client-side validation
+    const signupForm = document.getElementById('signupForm');
+
+    signupForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Passwords do not match!',
+            });
+            return;
+        }
+
+        // Check password length and complexity (example: at least 8 characters)
+        if (password.length < 8) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Weak Password',
+                text: 'Password must be at least 8 characters long!',
+            });
+            return;
+        }
+
+        // If validation passes, submit the form
+        Swal.fire({
+            icon: 'success',
+            title: 'Validation Successful!',
+            text: 'Submitting your data...',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            signupForm.submit(); // Submit the form
+        });
+    });
+</script>
 </body>
 </html>

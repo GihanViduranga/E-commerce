@@ -1,131 +1,131 @@
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="styles/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>ALOHA Fashion</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
+    .navbar {
+      background-color: #003135;
     }
-
-    header {
-      background: linear-gradient(135deg, #1e2a47, #024950);
+    .navbar-brand {
       color: #fff;
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      font-weight: bold;
     }
-
-    header h1 {
-      font-size: 24px;
-      margin: 0;
+    .navbar-brand:hover {
+      color: #0FA4AF;
     }
-
-    .search-bar {
-      display: flex;
-      align-items: center;
-      background-color: #fff;
-      border-radius: 15px;
-      padding: 5px 20px;
-      width: 60%;
+    .navbar-nav .nav-link {
+      color: white;
     }
-
-    .search-bar input {
-      border: none;
-      outline: none;
-      padding: 10px;
-      font-size: 16px;
-      border-radius: 15px;
-      width: 100%;
-      margin-right: 10px;
-      box-sizing: border-box;
+    .navbar-nav .nav-link:hover {
+      color: #0FA4AF;
     }
-
-    .search-bar button {
-      background-color: #964734;
-      border: none;
-      border-radius: 15px;
-      padding: 10px 15px;
-      color: #fff;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    .category-icons img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
     }
-
-    .search-bar button:hover {
-      background-color: #ff7f50;
+    .category-label {
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: 500;
     }
-
-    .search-bar i {
-      margin-right: 5px;
+    .hero-section {
+      background: linear-gradient(135deg, #024950, #135f6b);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
     }
-
-    .logout-container {
-      margin-left: 20px;
+    .hero-section h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-
-    .logout-button {
-      background-color: #ff6347;
-      color: #fff;
-      padding: 10px 15px;
-      font-size: 16px;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+    .hero-section p {
+      font-size: 1.2rem;
     }
-
-    .logout-button:hover {
-      background-color: #ff4500;
+    #carouselExampleAutoplaying{
+        /*margin-top: 20px;*/
+        height: 600px;
     }
   </style>
-
-
 </head>
 <body>
-<header>
-  <h1>ALOHA</h1>
-  <div class="search-bar">
-    <input type="text" placeholder="Search the entire store...">
-    <button><i class="fas fa-search"></i> Search</button>
+<%
+  // Retrieve the user's role and name from the session
+  String userRole = (String) session.getAttribute("userRole");
+%>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">ALOHA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <%-- Conditionally display Admin dropdown if the role is "admin" --%>
+    <% if ("admin".equals(userRole)) { %>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Admin
+      </a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Manage Users</a></li>
+        <li><a class="dropdown-item" href="addProduct.jsp">Manage Products</a></li>
+        <li><a class="dropdown-item" href="#">Reports</a></li>
+      </ul>
+    </li>
+    <% } %>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <form class="d-flex ms-auto me-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search site" aria-label="Search">
+        <button class="btn btn-warning" type="submit">Search</button>
+      </form>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.jsp">Logout</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="logout-container">
-    <button class="logout-button">Logout</button>
-  </div>
-</header>
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+</nav>
+
+<!-- Hero Section -->
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="images/Wall1.jpg" class="d-block w-75" alt="...">
+      <img src="images/Wallimg1.jpg" class="d-block w-100" style="height: 600px" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/Wall2.jpg" class="d-block w-75" alt="...">
+      <img src="images/Wallimg2.jpg" class="d-block w-100" style="height: 600px" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/Wall3.jpg" class="d-block w-75" alt="...">
+      <img src="images/Wallimg3.jpg" class="d-block w-100" style="height: 600px" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/Wall4.jpg" class="d-block w-75" alt="...">
+      <img src="images/Wallimg5.jpg" class="d-block w-100" style="height: 600px" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="images/Wall5.jpg" class="d-block w-75" alt="...">
+      <img src="images/Wallimg6.jpg" class="d-block w-100" style="height: 600px" alt="...">
     </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-<div class="container">
-  <%--<div class="category-container">
+
+<%--<div class="container">
+  <div class="category-container">
     <%
       Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/dbname", "username", "password");
       Statement stmt = conn.createStatement();
@@ -140,11 +140,52 @@
       }
       conn.close();
     %>
-  </div>--%>
+  </div>
+</div>--%>
+<!-- Categories -->
+<div class="container my-5">
+  <div class="row text-center category-icons">
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Cakes">
+      <p class="category-label">Cakes</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Flowers">
+      <p class="category-label">Flowers</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Chocolates">
+      <p class="category-label">Chocolates</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Clothing">
+      <p class="category-label">Clothing</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Electronics">
+      <p class="category-label">Electronics</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Fashion">
+      <p class="category-label">Fashion</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Food">
+      <p class="category-label">Food</p>
+    </div>
+    <div class="col-6 col-md-3">
+      <img src="https://via.placeholder.com/80" alt="Grocery">
+      <p class="category-label">Grocery Items</p>
+    </div>
+  </div>
 </div>
 
+<!-- Footer -->
+<footer class="text-center py-3" style="background-color: #003135; color: white;">
+  <p>&copy; 2025 ALOHA. All Rights Reserved.</p>
+</footer>
 
-
+<!-- Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
