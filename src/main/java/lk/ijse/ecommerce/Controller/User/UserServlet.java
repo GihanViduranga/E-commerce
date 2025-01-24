@@ -5,8 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.ecommerce.BO.custom.BOImpl.userBOImpl;
-import lk.ijse.ecommerce.DTO.userDTO;
+import lk.ijse.ecommerce.bo.custom.BOImpl.userBOImpl;
+import lk.ijse.ecommerce.dto.userDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

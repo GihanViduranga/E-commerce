@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="lk.ijse.ecommerce.Entity.Users" %>
+<%@ page import="lk.ijse.ecommerce.entity.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +72,7 @@
     <!-- User List -->
     <h2>User List</h2>
     <%
-        List<Users> userList = (List<Users>) request.getAttribute("users");
+        List<User> userList = (List<User>) request.getAttribute("users");
         if (userList != null && !userList.isEmpty()) {
     %>
     <table class="table table-striped">
@@ -87,11 +87,11 @@
         </thead>
         <tbody>
         <%
-            for (Users users : userList) {
+            for (User users : userList) {
         %>
         <tr>
             <td><%= users.getUserId()%></td>
-            <td><%= users.getFullName()%></td>
+            <td><%= users.getUsername()%></td>
             <td><%= users.getEmail()%></td>
             <td><%= users.getRole()%></td>
             <td>

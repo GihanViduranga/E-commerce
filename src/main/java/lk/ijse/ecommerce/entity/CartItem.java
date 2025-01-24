@@ -1,4 +1,4 @@
-package lk.ijse.ecommerce.Entity;
+package lk.ijse.ecommerce.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,20 +7,20 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "order_detail")
+@Table(name = "cart_item")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class OrderDetail {
+public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderId", nullable = false)
-    private Order order;
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productId", nullable = false)
@@ -28,7 +28,4 @@ public class OrderDetail {
 
     @Column(nullable = false)
     private Integer quantity;
-
-    @Column(nullable = false)
-    private Double price;
 }

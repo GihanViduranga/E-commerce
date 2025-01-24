@@ -1,10 +1,10 @@
-package lk.ijse.ecommerce.BO.custom.BOImpl;
+package lk.ijse.ecommerce.bo.custom.BOImpl;
 
-import lk.ijse.ecommerce.BO.custom.userBO;
-import lk.ijse.ecommerce.DAO.custom.DAOImpl.userDAOImpl;
-import lk.ijse.ecommerce.DAO.custom.UserDAO;
-import lk.ijse.ecommerce.DTO.userDTO;
-import lk.ijse.ecommerce.Entity.User;
+import lk.ijse.ecommerce.bo.custom.userBO;
+import lk.ijse.ecommerce.dao.custom.daoimpl.userDAOImpl;
+import lk.ijse.ecommerce.dao.custom.UserDAO;
+import lk.ijse.ecommerce.dto.userDTO;
+import lk.ijse.ecommerce.entity.User;
 
 
 public class userBOImpl implements userBO {

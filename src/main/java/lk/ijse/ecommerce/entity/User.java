@@ -1,4 +1,4 @@
-package lk.ijse.ecommerce.Entity;
+package lk.ijse.ecommerce.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -51,5 +51,14 @@ public class User {
         this.email = email;
         this.password = password;
 
+    }
+
+    public User(Long userId, String username, String email, String password, UserRole role, Boolean status) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.status = status;
     }
 }

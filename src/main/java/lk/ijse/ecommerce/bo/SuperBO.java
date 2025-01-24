@@ -1,4 +1,4 @@
-package lk.ijse.ecommerce.BO;
+package lk.ijse.ecommerce.bo;
 
 public interface SuperBO {
 }

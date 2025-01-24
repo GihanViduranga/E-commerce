@@ -1,23 +1,19 @@
-package lk.ijse.ecommerce.DAO.custom.DAOImpl;
+package lk.ijse.ecommerce.dao.custom.daoimpl;
 
-import lk.ijse.ecommerce.DAO.custom.UserDAO;
-import lk.ijse.ecommerce.DAO.custom.loginDAO;
-import lk.ijse.ecommerce.Entity.User;
+import lk.ijse.ecommerce.dao.custom.UserDAO;
+import lk.ijse.ecommerce.dao.custom.loginDAO;
+import lk.ijse.ecommerce.entity.User;
 import lk.ijse.ecommerce.config.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.List;
-
 public class loginDAOImpl implements loginDAO {
 
-    public boolean check(String email, String password) {
+    @Override
+    public User check(String email, String password) {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = null;
-        boolean isValid = false;
 
         try {
             transaction = session.beginTransaction();
@@ -28,9 +24,17 @@ public class loginDAOImpl implements loginDAO {
             query.setParameter("email", email);
             query.setParameter("password", password);
 
-            // Check if a result exists
-            isValid = query.uniqueResult() != null;
-
+            User user = query.uniqueResult();
+            if (user != null) {
+                return new User(
+                        user.getUserId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getRole(),
+                        user.getStatus()
+                );
+            }
             // Commit the transaction
             transaction.commit();
         } catch (Exception e) {
@@ -41,8 +45,7 @@ public class loginDAOImpl implements loginDAO {
         } finally {
             session.close();
         }
-
-        return isValid;
+        return null;
     }
 
 

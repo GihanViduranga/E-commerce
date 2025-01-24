@@ -1,8 +1,8 @@
-package lk.ijse.ecommerce.DAO.custom.DAOImpl;
+package lk.ijse.ecommerce.dao.custom.daoimpl;
 
 
-import lk.ijse.ecommerce.DAO.custom.UserDAO;
-import lk.ijse.ecommerce.Entity.User;
+import lk.ijse.ecommerce.dao.custom.UserDAO;
+import lk.ijse.ecommerce.entity.User;
 import lk.ijse.ecommerce.config.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

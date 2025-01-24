@@ -1,6 +1,6 @@
 package lk.ijse.ecommerce.config;
 
-import lk.ijse.ecommerce.Entity.*;
+import lk.ijse.ecommerce.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

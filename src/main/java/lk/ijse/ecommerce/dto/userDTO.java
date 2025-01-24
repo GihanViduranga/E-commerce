@@ -1,6 +1,6 @@
-package lk.ijse.ecommerce.DTO;
+package lk.ijse.ecommerce.dto;
 
-import lk.ijse.ecommerce.Entity.User;
+import lk.ijse.ecommerce.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

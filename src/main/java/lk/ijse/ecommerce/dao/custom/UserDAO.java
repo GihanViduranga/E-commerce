@@ -1,8 +1,8 @@
-package lk.ijse.ecommerce.DAO.custom;
+package lk.ijse.ecommerce.dao.custom;
 
 
-import lk.ijse.ecommerce.DAO.SuperDAO;
-import lk.ijse.ecommerce.Entity.User;
+import lk.ijse.ecommerce.dao.SuperDAO;
+import lk.ijse.ecommerce.entity.User;
 
 import java.util.List;
 
