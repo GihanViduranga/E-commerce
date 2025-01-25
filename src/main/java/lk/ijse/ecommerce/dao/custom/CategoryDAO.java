@@ -8,4 +8,10 @@ import java.util.List;
 
 public interface CategoryDAO extends CrudDAO<Category> {
     List<Category> categoryList();
+
+    boolean update(Category category);
+
+    List<Category> categoryNameList();
+
+    Category getById(int categoryId);
 }

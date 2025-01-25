@@ -10,7 +10,6 @@ import lk.ijse.ecommerce.bo.custom.CategoryBO;
 import lk.ijse.ecommerce.dto.categoryDTO;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "category_list", value = "/categoryList")
@@ -24,7 +23,7 @@ public class CategoryListServlet extends HttpServlet {
             categories = categoryBO.categoryList();
             req.setAttribute("categoryList", categories);
 
-            req.getRequestDispatcher("categoryManagement.jsp").forward(req, resp);
+            req.getRequestDispatcher("/categoryManagement.jsp").forward(req, resp);
         }catch (Exception e) {
             e.printStackTrace();
 

@@ -32,4 +32,19 @@ public class Category {
         this.description = description;
         this.image = image;
     }
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Category(int categoryId, String name, String description) {
+        this.categoryId = categoryId;
+        this.name = name;
+        this.description = description;
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

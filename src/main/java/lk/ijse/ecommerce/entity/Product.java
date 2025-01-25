@@ -34,6 +34,14 @@ public class Product {
     @JoinColumn(name = "categoryId")
     private Category category;
 
-
     private String imagepath;
+
+    public Product(String name, String description, Double price, Integer stock, Category category, String imagepath) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+        this.imagepath = imagepath;
+    }
 }

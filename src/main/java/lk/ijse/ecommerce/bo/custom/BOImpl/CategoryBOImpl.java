@@ -25,4 +25,27 @@ public class CategoryBOImpl implements CategoryBO {
         }
         return allCategories;
     }
+
+    @Override
+    public boolean updateCategory(categoryDTO category) {
+        return categoryDAO.update(new Category(category.getName(),category.getDescription()));
+    }
+
+    @Override
+    public List<categoryDTO> getAllCategoryNames() {
+        List<Category> all = categoryDAO.categoryNameList();
+        List<categoryDTO> allCategories = new ArrayList<>();
+        for (Category category : all) {
+            allCategories.add(new categoryDTO(category.getName()));
+        }
+        return allCategories;
+    }
+
+    @Override
+    public categoryDTO getById(int categoryId) {
+        Category category = categoryDAO.getById(categoryId);
+        return new categoryDTO(category.getCategoryId(), category.getName(), category.getDescription(), category.getImage());
+    }
+
+
 }

@@ -20,4 +20,19 @@ public class categoryDTO {
         this.description = description;
         this.image = image;
     }
+
+    public categoryDTO(String categoryName, String description) {
+            this.name = categoryName;
+            this.description = description;
+    }
+
+    public categoryDTO(int id, String categoryName, String description) {
+            this.categoryId = id;
+            this.name = categoryName;
+            this.description = description;
+    }
+
+    public categoryDTO(String name) {
+        this.name = name;
+    }
 }

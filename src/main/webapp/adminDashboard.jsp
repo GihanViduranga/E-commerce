@@ -125,10 +125,10 @@
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">Admin Dashboard</div>
-    <a href="productManagement.jsp"><i class="fas fa-box"></i> <span>Products</span></a>
+    <a href="productServlet"><i class="fas fa-box"></i> <span>Products</span></a>
     <a href="categoryList"><i class="fas fa-list-alt"></i> <span>Categories</span></a>
     <a href="#order-management"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
-    <a href="userManagement.jsp"><i class="fas fa-users"></i> <span>Users</span></a>
+    <a href="user_list"><i class="fas fa-users"></i> <span>Users</span></a>
     <a href="index.jsp" class="text-danger"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
 </div>
 
@@ -147,7 +147,7 @@
                 <img src="images/ProductManage.jpg" alt="Product Management">
                 <h5>Product Management</h5>
                 <p>Manage your products efficiently, including adding, updating, and deleting products.</p>
-                <a href="productManagement.jsp" class="btn btn-modern btn-primary">Manage Products</a>
+                <a href="productServlet" class="btn btn-modern btn-primary">Manage Products</a>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -175,7 +175,7 @@
                 <img src="images/UserManage.jpg" alt="User Management">
                 <h5>User Management</h5>
                 <p>View and manage customer accounts with ease.</p>
-                <a href="userManagement.jsp" class="btn btn-modern btn-success">Manage Users</a>
+                <a href="user_list" class="btn btn-modern btn-success">Manage Users</a>
             </div>
         </div>
     </div>

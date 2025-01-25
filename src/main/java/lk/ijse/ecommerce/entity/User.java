@@ -61,4 +61,8 @@ public class User {
         this.role = role;
         this.status = status;
     }
+
+    public User(Long userId) {
+        this.userId = userId;
+    }
 }

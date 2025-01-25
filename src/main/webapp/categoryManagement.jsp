@@ -71,10 +71,10 @@
                         class="btn btn-sm btn-warning edit-btn"
                         data-bs-toggle="modal"
                         data-bs-target="#editModal"
-                        data-id="1"
-                        data-name="Example Category"
-                        data-description="This is an example description"
-                        data-image="example-image-url.jpg">
+                        data-id="<%= categoryDTO.getCategoryId() %>"
+                        data-name="<%= categoryDTO.getName() %>"
+                        data-description="<%= categoryDTO.getDescription() %>"
+                        data-image="<%= categoryDTO.getImage() %>">
                     Edit
                 </button>
                 <a href="CategoryServlet?action=delete&id=1" class="btn btn-sm btn-danger">Delete</a>
@@ -101,32 +101,25 @@
                 </div>
                 <div class="modal-body">
                     <!-- Important: Add enctype and correct servlet mapping -->
-                    <form action="categoryUpdate" method="post" enctype="multipart/form-data">
-                        <input type="hidden" name="action" value="update">
+                    <form action="categoryUpdate" method="post" >
                         <input type="hidden" id="modal-category-id" name="id">
+
                         <!-- Category Name -->
                         <div class="mb-3">
                             <label for="modal-category-name" class="form-label">Category Name</label>
                             <input type="text" class="form-control" id="modal-category-name" name="name" required>
                         </div>
+
                         <!-- Category Description -->
                         <div class="mb-3">
                             <label for="modal-category-description" class="form-label">Category Description</label>
                             <textarea class="form-control" id="modal-category-description" name="description" rows="3" required></textarea>
                         </div>
-                        <!-- Category Image -->
-                        <%--<div class="mb-3">
-                            <label for="modal-category-image" class="form-label">Category Image</label>
-                            <input type="file" class="form-control" id="modal-category-image" name="categoryImage" accept="image/*">
-                            <small class="text-muted">Leave empty to keep current image</small>
-                            <div class="mt-2">
-                                <img id="modal-current-image" src="" alt="Category Image" style="max-width: 150px; max-height: 100px;">
-                            </div>
-                            <input type="hidden" id="current-image-path" name="currentImage">
-                        </div>--%>
+
                         <!-- Submit Button -->
                         <button type="submit" class="btn btn-success">Update Category</button>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -171,6 +164,20 @@
     document.getElementById('modal-category-image').addEventListener('change', function() {
         previewImage(this, document.getElementById('modal-current-image'));
     });
+
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            const name = this.getAttribute('data-name');
+            const description = this.getAttribute('data-description');
+
+            // Populate modal fields
+            document.getElementById('modal-category-id').value = id;
+            document.getElementById('modal-category-name').value = name;
+            document.getElementById('modal-category-description').value = description;
+        });
+    });
+
 
     /*const categoryForm = document.getElementById('categoryForm');
 

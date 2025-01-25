@@ -1,6 +1,7 @@
 package lk.ijse.ecommerce.bo;
 
 import lk.ijse.ecommerce.bo.custom.BOImpl.CategoryBOImpl;
+import lk.ijse.ecommerce.bo.custom.BOImpl.ProductBOImpl;
 import lk.ijse.ecommerce.bo.custom.BOImpl.loginBOImpl;
 import lk.ijse.ecommerce.bo.custom.BOImpl.userBOImpl;
 
@@ -14,7 +15,7 @@ public class BOFactory {
     }
 
     public enum BOTypes{
-        LOGIN,USER,CATEGORY
+        LOGIN,USER,CATEGORY,PRODUCT
     }
 
     public SuperBO getBO(BOTypes boTypes){
@@ -26,6 +27,8 @@ public class BOFactory {
                 return new userBOImpl();
             case CATEGORY:
                 return new CategoryBOImpl();
+            case PRODUCT:
+                return new ProductBOImpl();
             default:
                 return null;
         }

@@ -23,4 +23,8 @@ public class userDTO {
         this.email = email;
         this.password = password;
     }
+
+    public userDTO(String userId) {
+        this.userId = Long.parseLong(userId);
+    }
 }
