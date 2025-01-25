@@ -125,7 +125,7 @@
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">Admin Dashboard</div>
-    <a href="productServlet"><i class="fas fa-box"></i> <span>Products</span></a>
+    <a href="product-list"><i class="fas fa-box"></i> <span>Products</span></a>
     <a href="categoryList"><i class="fas fa-list-alt"></i> <span>Categories</span></a>
     <a href="#order-management"><i class="fas fa-shopping-cart"></i> <span>Orders</span></a>
     <a href="user_list"><i class="fas fa-users"></i> <span>Users</span></a>
@@ -147,7 +147,7 @@
                 <img src="images/ProductManage.jpg" alt="Product Management">
                 <h5>Product Management</h5>
                 <p>Manage your products efficiently, including adding, updating, and deleting products.</p>
-                <a href="productServlet" class="btn btn-modern btn-primary">Manage Products</a>
+                <a href="product-list" class="btn btn-modern btn-primary">Manage Products</a>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">

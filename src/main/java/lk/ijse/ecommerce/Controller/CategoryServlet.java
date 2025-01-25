@@ -85,16 +85,18 @@ public class CategoryServlet extends HttpServlet {
             if (isSaved) {
                 message = "Category Added Successfully";
                 alertType = "success";
+                response.sendRedirect("categoryList?message=" + message + "&alertType=" + alertType);
             } else {
                 // Delete uploaded file if database save fails
                 Files.deleteIfExists(Paths.get(filePath));
                 message = "Category Add Fail. Please try again!";
                 alertType = "error";
+                response.sendRedirect("categoryList?message=" + message + "&alertType=" + alertType);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("categoryManagement.jsp?error=" + e.getMessage());
+            response.sendRedirect("categoryList?error=" + e.getMessage());
         }
     }
 

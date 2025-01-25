@@ -106,15 +106,15 @@ public class ProductSaveServlet extends HttpServlet {
             if (isSaved) {
                 req.setAttribute("message", "Product added Successfully!");
                 req.setAttribute("alertType", "success"); // or "error"
-                req.getRequestDispatcher("productManagement.jsp").forward(req,resp);
+                req.getRequestDispatcher("product-list").forward(req,resp);
             } else {
-                req.setAttribute("message", "Product added Fld!");
+                req.setAttribute("message", "Product added Filed!");
                 req.setAttribute("alertType", "success"); // or "error"
-                req.getRequestDispatcher("productManagement.jsp").forward(req,resp);
+                req.getRequestDispatcher("product-list").forward(req,resp);
             }
         }catch (Exception e) {
             e.printStackTrace();
-            resp.sendRedirect("productManagement.jsp");
+            resp.sendRedirect("product-list");
         }
 
 
