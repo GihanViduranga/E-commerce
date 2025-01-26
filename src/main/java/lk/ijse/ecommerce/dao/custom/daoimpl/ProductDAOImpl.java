@@ -48,4 +48,22 @@ public class ProductDAOImpl implements ProductDAO {
         }
 
     }
+
+    @Override
+    public boolean update(Product product) {
+        Session session = null;
+        Transaction transaction = null;
+
+        try{
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+            session.update(product);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            transaction.rollback();
+            return false;
+        }
+    }
 }

@@ -134,5 +134,35 @@ public class CategoryDAOImpl implements CategoryDAO {
         return category;
     }
 
+    @Override
+    public Category getByName(String productCategory) {
+        Session session = null;
+        Transaction transaction = null;
+        Category category = null;
+
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            // Fetching categories from the database
+            String hql = "FROM Category WHERE name = :name";
+            Query<Category> query = session.createQuery(hql, Category.class);
+
+            query.setParameter("name", productCategory);
+            category = query.uniqueResult();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction!= null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return category;
+    }
+
 
 }

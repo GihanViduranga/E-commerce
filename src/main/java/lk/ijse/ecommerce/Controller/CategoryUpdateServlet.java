@@ -22,6 +22,7 @@ public class CategoryUpdateServlet extends HttpServlet {
         String categoryName = req.getParameter("name");
         String description = req.getParameter("description");
         int id= Integer.parseInt(req.getParameter("id"));
+
         System.out.println(categoryName + " " + description);
         String message = "";
         String alertType = "";

@@ -84,21 +84,26 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editProductForm" action="productServlet" method="post" enctype="multipart/form-data">
+                    <form id="editProductForm" action="product-update" method="post" enctype="multipart/form-data">
                         <input type="hidden" name="id" id="editProductId">
                         <div class="mb-3">
                             <label for="editName" class="form-label">Product Name</label>
                             <input type="text" class="form-control" id="editName" name="name" required>
                         </div>
                         <div class="mb-3">
+                            <label for="editDescription" class="form-label">Product Description</label>
+                            <input type="text" class="form-control" id="editDescription" name="des" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="editCategory" class="form-label">Category</label>
-                            <select class="form-control" id="editCategory" name="category" required>
+                            <input type="text" class="form-control" id="editCategory" name="category" required>
+                            <%--<select class="form-control" id="editCategory" name="category" required>
                                 <% if (categories != null) { %>
-                                    <% for (categoryDTO category : categories) { %>
-                                        <option value="<%= category %>"><%= category %></option>
-                                    <% } %>
+                                <% for (categoryDTO category : categories) { %>
+                                <option value="<%= category.getCategoryId() %>"><%= category.getName() %></option>
                                 <% } %>
-                            </select>
+                                <% } %>
+                            </select>--%>
                         </div>
                         <div class="mb-3">
                             <label for="editQty" class="form-label">Quantity</label>
@@ -110,7 +115,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="editImage" class="form-label">Product Image</label>
-                            <input type="file" class="form-control" id="editImage" name="image" accept="image/*">
+                            <input type="text" class="form-control" id="editImage" name="image" required>
+                            <div id="imagePreviewContainer" class="mt-2"></div>
                         </div>
                         <button type="submit" class="btn btn-success">Update Product</button>
                     </form>
@@ -118,6 +124,7 @@
             </div>
         </div>
     </div>
+
     <%
         List<productDTO> dataList = (List<productDTO>) request.getAttribute("productList");
         if (dataList != null && !dataList.isEmpty()) {
@@ -150,7 +157,18 @@
             <td><%=productDTO.getCategory().getName() %></td>
             <td><%=productDTO.getPrice() %></td>
             <td>
-                <button class="btn btn-sm btn-warning" onclick="openEditModal('1', 'Example Product', 'Example Category', '10', '100')">Edit</button>
+                <button class="btn btn-sm btn-warning"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editProductModal"
+                        data-editProductId="<%=productDTO.getProductId() %>"
+                        data-editName="<%=productDTO.getName() %>"
+                        data-editDescription="<%=productDTO.getDescription() %>"
+                        data-editCategory="<%=productDTO.getCategory().getName() %>"
+                        data-editQty="<%=productDTO.getStock() %>"
+                        data-editPrice="<%=productDTO.getPrice() %>"
+                        data-image="<%=productDTO.getImagepath() %>"
+
+                >Edit</button>
                 <a href="productServlet?action=delete&id=1" class="btn btn-sm btn-danger">Delete</a>
             </td>
         </tr>
@@ -169,15 +187,43 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function openEditModal(id, name, category, qty, price) {
-        document.getElementById('editProductId').value = id;
-        document.getElementById('editName').value = name;
-        document.getElementById('editCategory').value = category;
-        document.getElementById('editQty').value = qty;
-        document.getElementById('editPrice').value = price;
-        var editProductModal = new bootstrap.Modal(document.getElementById('editProductModal'));
-        editProductModal.show();
-    }
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all edit buttons
+        const editButtons = document.querySelectorAll('button[data-bs-target="#editProductModal"]');
+
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const productId = this.getAttribute('data-editProductId');
+                const name = this.getAttribute('data-editName');
+                const des = this.getAttribute('data-editDescription');
+                const category = this.getAttribute('data-editCategory');
+                const quantity = this.getAttribute('data-editQty');
+                const price = this.getAttribute('data-editPrice');
+                const imagePath = this.getAttribute('data-image');
+
+                // Set values in modal fields
+                document.getElementById('editProductId').value = productId;
+                document.getElementById('editName').value = name;
+                document.getElementById('editDescription').value = des;
+                document.getElementById('editCategory').value = category;
+                document.getElementById('editQty').value = quantity;
+                document.getElementById('editPrice').value = price;
+                document.getElementById('editImage').value = imagePath;
+
+                // If you want to display the image path or preview the image
+                const imagePreview = document.createElement('img');
+                imagePreview.src = imagePath;
+                imagePreview.alt = "Product Image";
+                imagePreview.style.width = '100px';
+                imagePreview.style.height = '100px';
+
+                const imageContainer = document.getElementById('imagePreviewContainer');
+                imageContainer.innerHTML = ''; // Clear existing preview
+                imageContainer.appendChild(imagePreview);
+            });
+        });
+    });
+
 </script>
 </body>
 </html>

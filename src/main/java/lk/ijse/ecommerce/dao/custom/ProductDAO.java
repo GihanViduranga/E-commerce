@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProductDAO extends SuperDAO {
     boolean save(Product product);
     List<Product> getAllProducts();
+
+    boolean update(Product product);
 }

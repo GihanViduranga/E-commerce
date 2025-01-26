@@ -116,6 +116,12 @@
                             <textarea class="form-control" id="modal-category-description" name="description" rows="3" required></textarea>
                         </div>
 
+                        <!-- Category Image -->
+                        <div class="mb-3">
+                            <label for="modal-current-image" class="form-label">Category Image</label>
+                            <textarea class="form-control" id="modal-current-image" name="images" rows="3" readonly></textarea>
+                        </div>
+
                         <!-- Submit Button -->
                         <button type="submit" class="btn btn-success">Update Category</button>
                     </form>
@@ -124,58 +130,46 @@
             </div>
         </div>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // JavaScript to populate the modal with dynamic data
     document.querySelectorAll('.edit-btn').forEach(button => {
         button.addEventListener('click', function () {
+            // Get the data attributes from the button
             const id = this.getAttribute('data-id');
             const name = this.getAttribute('data-name');
             const description = this.getAttribute('data-description');
             const image = this.getAttribute('data-image');
 
+            // Populate the modal form fields
             document.getElementById('modal-category-id').value = id;
             document.getElementById('modal-category-name').value = name;
             document.getElementById('modal-category-description').value = description;
-            document.getElementById('modal-current-image').src = 'images/categories/' + image;
-            document.getElementById('current-image-path').value = image;
+            document.getElementById('modal-current-image').src = image;
+
+            // Update the image preview if available
+            const imagePreview = document.getElementById('modal-current-image');
+            imagePreview.src = image; // Assuming the `data-image` contains a valid image URL or relative path
         });
     });
 
-    // Preview image before upload
+    // Preview image before upload in the modal
     function previewImage(input, imageElement) {
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 imageElement.src = e.target.result;
             };
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    // Add preview listeners
-    document.getElementById('image').addEventListener('change', function() {
-        previewImage(this, document.getElementById('preview-image'));
-    });
-
-    document.getElementById('modal-category-image').addEventListener('change', function() {
-        previewImage(this, document.getElementById('modal-current-image'));
-    });
-
-    document.querySelectorAll('.edit-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            const id = this.getAttribute('data-id');
-            const name = this.getAttribute('data-name');
-            const description = this.getAttribute('data-description');
-
-            // Populate modal fields
-            document.getElementById('modal-category-id').value = id;
-            document.getElementById('modal-category-name').value = name;
-            document.getElementById('modal-category-description').value = description;
-        });
+    // Add listener for image preview in the modal
+    document.getElementById('images').addEventListener('change', function () {
+        const modalImagePreview = document.getElementById('modal-current-image');
+        previewImage(this, modalImagePreview);
     });
 
 

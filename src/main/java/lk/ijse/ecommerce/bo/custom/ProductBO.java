@@ -10,4 +10,6 @@ public interface ProductBO extends SuperBO {
     boolean SaveProduct(productDTO productDTO);
 
     List<productDTO> getAllProductDTOs();
+
+    boolean updateProduct(productDTO productDTO);
 }

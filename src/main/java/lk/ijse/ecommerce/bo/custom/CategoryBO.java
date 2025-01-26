@@ -15,4 +15,6 @@ public interface CategoryBO extends SuperBO {
     List<categoryDTO> getAllCategoryNames();
 
     categoryDTO getById(int categoryId);
+
+    categoryDTO getByName(String productCategory);
 }

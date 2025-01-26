@@ -14,4 +14,6 @@ public interface CategoryDAO extends CrudDAO<Category> {
     List<Category> categoryNameList();
 
     Category getById(int categoryId);
+
+    Category getByName(String productCategory);
 }

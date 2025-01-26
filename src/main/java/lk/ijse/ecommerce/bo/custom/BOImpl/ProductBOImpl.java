@@ -43,4 +43,10 @@ public class ProductBOImpl implements ProductBO {
         }
         return allProductDTOs;
     }
+
+    @Override
+    public boolean updateProduct(productDTO productDTO) {
+        Category category = new Category(productDTO.getCategory().getCategoryId(),productDTO.getCategory().getName(),productDTO.getCategory().getDescription(),productDTO.getCategory().getImage());
+        return productDAO.update(new Product(productDTO.getProductId(),productDTO.getName(),productDTO.getDescription(),productDTO.getPrice(),productDTO.getStock(),category,productDTO.getImagepath()));
+    }
 }
