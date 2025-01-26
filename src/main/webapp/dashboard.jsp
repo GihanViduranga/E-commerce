@@ -2,7 +2,10 @@
 <%@ page import="java.sql.Statement" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.Connection" %>
+<%@ page import="lk.ijse.ecommerce.dto.categoryDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="lk.ijse.ecommerce.dto.categoryDTO" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,9 +57,17 @@
         /*margin-top: 20px;*/
         height: 600px;
     }
-    .category-container{
-      display: flex;
-      justify-content: space-between;
+    .category-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .category-card .btn {
+      background-color: #0FA4AF;
+      border: none;
+    }
+    .category-card .btn:hover {
+      background-color: #007B8C;
     }
   </style>
 </head>
@@ -111,51 +122,45 @@
   </button>
 </div>
 
-<!-- Categories Section -->
-<div class="container">
-  <h2 class="text-center mt-5 mb-4">Our Categories</h2>
-
-  <!-- Error/Success Messages -->
-  <% if (request.getAttribute("errorMessage") != null) { %>
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    ${errorMessage}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  <% } %>
-
-  <div class="category-container">
+<div class="container my-5">
+  <h2 class="text-center mb-4">Explore Our Categories</h2>
+  <div class="row">
     <%
-      try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce", "root", "199884");
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM category");
+      // Fetch the category list set in the request attribute
+      List<categoryDTO> categories = (List<categoryDTO>) request.getAttribute("categories");
 
-        while (rs.next()) {
+      // Check if the category list is not null and contains data
+      if (categories != null && !categories.isEmpty()) {
+        for (categoryDTO category : categories) {
+          String categoryName = category.getName();
+          String categoryImage = category.getImage();
     %>
-    <div class="category-card">
-      <img src="<%= rs.getString("image") %>" style="height: auto", width="80px",
-           alt="<%= rs.getString("name") %>"
-           class="category-image">
-      <h3 class="category-name"><%= rs.getString("name") %></h3>
-      <p class="category-description"><%= rs.getString("description") %></p>
+    <!-- Card -->
+    <div class="col-md-4 mb-4">
+      <div class="card text-center">
+        <img src="<%= categoryImage %>" class="card-img-top" alt="<%= categoryName %>" style="height: 200px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title"><%= categoryName %></h5>
+          <p class="card-text">Discover our stunning collection of <%= categoryName %>!</p>
+          <a href="categoryDetails?category=<%= categoryName %>" class="btn btn-primary">Explore</a>
+        </div>
+      </div>
     </div>
     <%
       }
-      rs.close();
-      stmt.close();
-      conn.close();
-    } catch(Exception e) {
-      request.setAttribute("errorMessage", "Database Error: " + e.getMessage());
+    } else {
     %>
-    <div class="alert alert-danger" role="alert">
-      An error occurred while loading categories. Please try again later.
+    <div class="text-center">
+      <p>No categories available at the moment. Please check back later!</p>
     </div>
     <%
       }
     %>
   </div>
 </div>
+
+
+
 
 
 <!-- Footer -->

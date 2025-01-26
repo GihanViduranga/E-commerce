@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
             }else {
                 message = "Login Successfully";
                 alertType = "success";
-                resp.sendRedirect("dashboard.jsp");
+                resp.sendRedirect("categories-load");
             }
 
         } else {
