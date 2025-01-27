@@ -22,20 +22,24 @@ public class CategoryUpdateServlet extends HttpServlet {
         String categoryName = req.getParameter("name");
         String description = req.getParameter("description");
         int id= Integer.parseInt(req.getParameter("id"));
+        String image = req.getParameter("images");
 
-        System.out.println(categoryName + " " + description);
+        System.out.println(categoryName + " " + description + " " + id + " " + image);
         String message = "";
         String alertType = "";
 
-        categoryDTO category = new categoryDTO(id,categoryName, description);
+        categoryDTO category = new categoryDTO(id,categoryName, description,image);
         try{
-            boolean isUpdate = categoryBO.updateCategory(category);
+            //boolean isUpdate = categoryBO.updateCategory(category);
+            boolean isUpdate = categoryBO.isUpdateCategory(category);
             if(isUpdate){
                 message = "Category Updated Successfully";
                 alertType = "success";
+                resp.sendRedirect("categoryList?message=" + message + "&alertType=" + alertType);
             } else {
                 message = "Failed to Update Category";
                 alertType = "error";
+                resp.sendRedirect("categoryList?message=" + message + "&alertType=" + alertType);
             }
         }catch (Exception e){
             message = "An error occurred: " + e.getMessage();

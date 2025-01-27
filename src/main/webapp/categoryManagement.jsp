@@ -101,8 +101,8 @@
                 </div>
                 <div class="modal-body">
                     <!-- Important: Add enctype and correct servlet mapping -->
-                    <form action="categoryUpdate" method="post" >
-                        <input type="hidden" id="modal-category-id" name="id">
+                    <form action="categoryUpdate" method="post">
+                        <input type="text" id="modal-category-id" name="id">
 
                         <!-- Category Name -->
                         <div class="mb-3">
@@ -147,11 +147,17 @@
             document.getElementById('modal-category-id').value = id;
             document.getElementById('modal-category-name').value = name;
             document.getElementById('modal-category-description').value = description;
-            document.getElementById('modal-current-image').src = image;
+            document.getElementById('modal-current-image').value = image; // Set the image path to the textarea
 
-            // Update the image preview if available
-            const imagePreview = document.getElementById('modal-current-image');
-            imagePreview.src = image; // Assuming the `data-image` contains a valid image URL or relative path
+            // Show the image preview
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            imagePreviewContainer.innerHTML = ''; // Clear previous image preview
+            const img = document.createElement('img');
+            img.src = image; // Set the image source
+            img.alt = "Category Image";
+            img.style.maxWidth = "100%"; // Ensure it fits in the modal
+            img.style.marginTop = "10px";
+            imagePreviewContainer.appendChild(img); // Add image to the preview container
         });
     });
 
@@ -166,11 +172,6 @@
         }
     }
 
-    // Add listener for image preview in the modal
-    document.getElementById('images').addEventListener('change', function () {
-        const modalImagePreview = document.getElementById('modal-current-image');
-        previewImage(this, modalImagePreview);
-    });
 
 
     /*const categoryForm = document.getElementById('categoryForm');

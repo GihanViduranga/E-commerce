@@ -1,6 +1,7 @@
 package lk.ijse.ecommerce.dao.custom;
 
 import lk.ijse.ecommerce.dao.SuperDAO;
+import lk.ijse.ecommerce.entity.Category;
 import lk.ijse.ecommerce.entity.Product;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface ProductDAO extends SuperDAO {
     List<Product> getAllProducts();
 
     boolean update(Product product);
+
+    List<Product> getCategoryById(Category category);
 }

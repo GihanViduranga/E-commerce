@@ -49,4 +49,29 @@ public class ProductBOImpl implements ProductBO {
         Category category = new Category(productDTO.getCategory().getCategoryId(),productDTO.getCategory().getName(),productDTO.getCategory().getDescription(),productDTO.getCategory().getImage());
         return productDAO.update(new Product(productDTO.getProductId(),productDTO.getName(),productDTO.getDescription(),productDTO.getPrice(),productDTO.getStock(),category,productDTO.getImagepath()));
     }
+
+    @Override
+    public List<productDTO> getCategoryById(categoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO.getCategoryId(),categoryDTO.getName(),categoryDTO.getDescription(),categoryDTO.getImage());
+        List<Product> allProducts = productDAO.getCategoryById(category);
+        List<productDTO> allProductDTOs = new ArrayList<>();
+
+        for (Product product : allProducts) {
+            allProductDTOs.add(
+                    new productDTO(
+                            product.getProductId(),
+                            product.getName(),
+                            product.getDescription(),
+                            product.getPrice(),
+                            product.getStock(),
+                            new categoryDTO(
+                                    product.getCategory().getCategoryId(),
+                                    product.getCategory().getName(),
+                                    product.getCategory().getDescription(),
+                                    product.getCategory().getImage()
+                            ),
+                            product.getImagepath()));
+        }
+        return allProductDTOs;
+    }
 }

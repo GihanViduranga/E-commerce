@@ -2,6 +2,7 @@ package lk.ijse.ecommerce.dao.custom.daoimpl;
 
 import lk.ijse.ecommerce.config.FactoryConfiguration;
 import lk.ijse.ecommerce.dao.custom.ProductDAO;
+import lk.ijse.ecommerce.entity.Category;
 import lk.ijse.ecommerce.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -65,5 +66,20 @@ public class ProductDAOImpl implements ProductDAO {
             transaction.rollback();
             return false;
         }
+    }
+
+    @Override
+    public List<Product> getCategoryById(Category category) {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Product> products = session.createQuery(
+                        "FROM Product p WHERE p.category.id = :categoryId", Product.class)
+                .setParameter("categoryId", category.getCategoryId())
+                .list();
+
+        transaction.commit();
+        session.close();
+        return products;
     }
 }

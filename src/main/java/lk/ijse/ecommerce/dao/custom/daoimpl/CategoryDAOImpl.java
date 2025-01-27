@@ -25,6 +25,8 @@ public class CategoryDAOImpl implements CategoryDAO {
         }catch (Exception e){
             e.printStackTrace();
             transaction.rollback();
+        }finally {
+            session.close();
         }
         return false;
     }
@@ -61,23 +63,18 @@ public class CategoryDAOImpl implements CategoryDAO {
 
     @Override
     public boolean update(Category category) {
-        Session session = null;
-        Transaction transaction = null;
-
         try {
-            session = FactoryConfiguration.getInstance().getSession();
-            transaction = session.beginTransaction();
-
+            Session session = FactoryConfiguration.getInstance().getSession();
+            Transaction transaction = session.beginTransaction();
             session.update(category);
             transaction.commit();
+            session.close();
             return true;
-        }catch (Exception e){
-            if (transaction!= null) {
-                transaction.rollback();
-            }
+        }catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -100,7 +97,9 @@ public class CategoryDAOImpl implements CategoryDAO {
                 transaction.rollback();
             }
             e.printStackTrace();
-        }
+        } finally {
+        session.close();
+    }
         return null;
     }
 
@@ -162,6 +161,21 @@ public class CategoryDAOImpl implements CategoryDAO {
             session.close();
         }
         return category;
+    }
+
+    @Override
+    public boolean updateCategory(Category category) {
+        try {
+            Session session = FactoryConfiguration.getInstance().getSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(category);
+            transaction.commit();
+            session.close();
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }

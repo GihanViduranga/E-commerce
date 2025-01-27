@@ -17,4 +17,6 @@ public interface CategoryBO extends SuperBO {
     categoryDTO getById(int categoryId);
 
     categoryDTO getByName(String productCategory);
+
+    boolean isUpdateCategory(categoryDTO category);
 }

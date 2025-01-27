@@ -28,7 +28,7 @@ public class CategoryBOImpl implements CategoryBO {
 
     @Override
     public boolean updateCategory(categoryDTO category) {
-        return categoryDAO.update(new Category(category.getName(),category.getDescription()));
+        return categoryDAO.update(new Category(category.getName(),category.getDescription(),category.getImage()));
     }
 
     @Override
@@ -51,6 +51,11 @@ public class CategoryBOImpl implements CategoryBO {
     public categoryDTO getByName(String productCategory) {
         Category category = categoryDAO.getByName(productCategory);
         return new categoryDTO(category.getCategoryId(), category.getName(), category.getDescription(), category.getImage());
+    }
+
+    @Override
+    public boolean isUpdateCategory(categoryDTO category) {
+        return categoryDAO.updateCategory(new Category(category.getName(),category.getDescription(),category.getImage()));
     }
 
 
